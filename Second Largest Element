@@ -1,0 +1,20 @@
+ public static int lenOfLongSubarr(int A[], int N, int K) {
+        // Complete the function
+        HashMap<Integer,Integer>umap=new HashMap<>();
+        int sum=0;
+        int maxlength=0;
+        for(int i=0;i<N;i++){
+            sum+=A[i];
+            if(sum==K){
+                maxlength=Math.max(maxlength,i+1);
+            }
+            if(umap.containsKey(sum-K)){
+                int index=umap.get(sum-K);
+                maxlength=Math.max(maxlength,i-index);
+            }
+            if(!umap.containsKey(sum)){
+                umap.put(sum,i);
+            }
+        }
+        return maxlength;
+    }
